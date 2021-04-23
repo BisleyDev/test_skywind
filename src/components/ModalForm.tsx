@@ -6,21 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
+import toggleModal from "../store/toggleModal";
+import {observer} from "mobx-react-lite";
 
-function rand() {
-	return Math.round(Math.random() * 20) - 10;
-}
 
-function getModalStyle() {
-	const top = 50 + rand();
-	const left = 50 + rand();
-	
-	return {
-		top: `${top}%`,
-		left: `${left}%`,
-		transform: `translate(-${top}%, -${left}%)`,
-	};
-}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -34,58 +23,58 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			justifyContent: 'space-between',
 			alignItems: 'center'
-			
 		},
 		margin: {
 			margin: theme.spacing(1),
 		},
 		addButton: {
 			height: 'max-content'
+		},
+		wrapModal: {
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center'
 		}
+
 	}),
 );
 
-export default function ModalForm() {
-	const classes = useStyles();
-	const [modalStyle] = React.useState(getModalStyle);
-	const [open, setOpen] = React.useState(false);
-	
-	const handleOpen = () => {
-		setOpen(prev=> !prev);
-	};
-	
-	const body = (
-		<div style={modalStyle} className={classes.paper}>
-			<div className={classes.margin}>
-				<Grid container spacing={2} alignItems="flex-end">
-					<Grid item>
-						<AccountCircle/>
-					</Grid>
-					<Grid item>
-						<TextField id="input-with-icon-grid" label="Add new user"/>
-					</Grid>
-				</Grid>
-			</div>
-			<Button variant="contained" color="primary" className={classes.addButton} onClick={handleOpen}>
-				Add
-			</Button>
+
+const ModalForm = observer(() => {
+		const classes = useStyles();
+
 		
-		</div>
-	);
-	
-	return (
-		<div>
-			<button type="button" onClick={handleOpen}>
-				Open Modal
-			</button>
+		const body = (
+			<div className={classes.paper}>
+				<div className={classes.margin}>
+					<Grid container spacing={2} alignItems="flex-end">
+						<Grid item>
+							<AccountCircle/>
+						</Grid>
+						<Grid item>
+							<TextField id="input-with-icon-grid" label="Add new user"/>
+						</Grid>
+					</Grid>
+				</div>
+				<Button variant="contained" color="primary" className={classes.addButton}
+						  onClick={toggleModal.toggleModalState}>
+					Add
+				</Button>
+			
+			</div>
+		);
+		
+		return (
 			<Modal
-				open={open}
-				onClose={handleOpen}
+				className={classes.wrapModal}
+				open={toggleModal.isOpen}
+				onClose={toggleModal.toggleModalState}
 				aria-labelledby="simple-modal-title"
 				aria-describedby="simple-modal-description"
 			>
 				{body}
 			</Modal>
-		</div>
-	);
-}
+		);
+	}
+)
+export default ModalForm;
