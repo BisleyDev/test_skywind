@@ -4,3 +4,8 @@ export interface IUser {
 	name: string,
 	status: boolean
 }
+
+export interface IVisibleModal {
+	isVisible: boolean,
+	toggle: ()=> boolean
+}

@@ -10,7 +10,8 @@
 }
 
 .margin {
-    margin: 1rem
+    margin: 1rem;
+
 }
 
 .addButton {
@@ -21,4 +22,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.callModalBtn {
+    margin: 3px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
