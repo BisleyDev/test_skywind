@@ -1,0 +1,10 @@
+.addButton {
+    margin: 3px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.extendedIcon {
+    margin-right: 5px;
+}

@@ -1,0 +1,11 @@
+.wrap {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+/*.paper {*/
+/*    padding: 5px;*/
+/*    text-align: center;*/
+/*    */
+/*},*/

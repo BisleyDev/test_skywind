@@ -1,14 +1,13 @@
 import {makeAutoObservable} from "mobx";
 
 class ToggleModal {
-    isOpen = true;
+    isOpen = false;
     constructor() {
         makeAutoObservable(this)
     }
 
     toggleModalState() {
-        // this.isOpen = !this.isOpen
-        console.log(this)
+        this.isOpen = !this.isOpen
     }
 }
 
