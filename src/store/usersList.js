@@ -30,14 +30,7 @@ class UsersList {
 
     changeStatus(id) {
         this.users = this.users.map(user => {
-            if(user.id === id) {
-                const updateUser = { ...user , status : !user.status}
-                if(updateUser.status) {
-
-                }
-                return updateUser
-            }
-            return  user;
+            return  user.id === id ? { ...user , status : !user.status} : user;
         })
     }
 
@@ -51,8 +44,8 @@ class UsersList {
             this.users = this.users.map(user=> {
                 if(user.status) {
                     let [hours, minutes, seconds] = user.time.split(':').map(el=> +el)
-                    const newSeconds = seconds + 1 >= 60 ? '00' && minutes+1 : seconds + 1
-                    const newMinutes = minutes >=60 ? '00' && hours+1 : minutes
+                    const newSeconds = seconds + 1 >= 60 ? ++minutes && '00' : seconds+1
+                    const newMinutes = minutes >=60 ? ++hours && '00' : minutes
                     const newTime = `${this.setZero(hours)}:${this.setZero(newMinutes)}:${this.setZero(newSeconds)}`
                     return {
                         ...user,

@@ -7,8 +7,8 @@ import styles from './add-button.module.css'
 export default function AddButton() {
 	
 	return (
-		<div className={styles.addButton} onClick={() => toggleModal.toggleModalState()}>
-			<Fab color="primary" aria-label="add">
+		<div className={styles.addButton} >
+			<Fab color="primary" aria-label="add" onClick={() => toggleModal.toggleModalState()}>
 				<AddIcon />
 			</Fab>
 		</div>

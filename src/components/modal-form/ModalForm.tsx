@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -12,9 +12,17 @@ import styles from './modal-form.module.css'
 
 const ModalForm: React.FC = observer(() => {
 		const [name, setName] = useState<string>('')
+		const [isValid, setValid] = useState<boolean>(true)
+		
 		function addUser() {
-			toggleModal.toggleModalState()
-			usersList.addUser(name)
+			if(name.length > 3) {
+				setValid(true)
+				toggleModal.toggleModalState()
+				usersList.addUser(name)
+				setName('')
+			} else {
+				setValid(false)
+			}
 		}
 		
 		return (
@@ -33,9 +41,11 @@ const ModalForm: React.FC = observer(() => {
 							</Grid>
 							<Grid item>
 								<TextField
+									error={!isValid}
 									id="input-with-icon-grid"
 									label="Add new user"
 									onChange={e => setName(e.target.value)}
+									helperText={!isValid ? "Name must be more than 3 letters" : ''}
 								/>
 							</Grid>
 						</Grid>
