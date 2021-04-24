@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -14,7 +14,9 @@ const ModalForm: React.FC = observer(() => {
 		const [name, setName] = useState<string>('')
 		const [isValid, setValid] = useState<boolean>(true)
 		
+		
 		function addUser() {
+			console.log("function addUser")
 			if(name.length > 3) {
 				setValid(true)
 				toggleModal.toggleModalState()
@@ -30,9 +32,7 @@ const ModalForm: React.FC = observer(() => {
 				className={styles.wrapModal}
 				open={toggleModal.isOpen}
 				onClose={() => toggleModal.toggleModalState()}
-				aria-labelledby="simple-modal-title"
-				aria-describedby="simple-modal-description"
-			>
+				>
 				<div className={styles.paper}>
 					<div className={styles.margin}>
 						<Grid container spacing={2} alignItems="flex-end">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -38,7 +38,7 @@ const DataTable = observer(() => {
 								<Typography component={'h4'}>
 									Status
 								</Typography>
-								</TableCell>
+							</TableCell>
 							<TableCell align="center">
 								<Typography component={'h4'}>
 									Change Status
@@ -52,31 +52,33 @@ const DataTable = observer(() => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{users.map(({time, name, status, id}) => (
-							<TableRow key={id}>
-								<TableCell align="center">{time}</TableCell>
-								<TableCell align="center">{name}</TableCell>
-								<TableCell align="center">{status ? 'Active' : 'InActive'}</TableCell>
-								<TableCell align="center">
-									<Button
-										color="primary"
-										className={styles.button}
-										onClick={() => usersList.changeStatus(id)}
-									>
-										<AutorenewIcon/>
-									</Button>
-								</TableCell>
-								<TableCell align="center">
-									<Button
-										color="secondary"
-										className={styles.button}
-										onClick={() => usersList.removeUser(id)}
-									>
-										<DeleteIcon/>
-									</Button>
-								</TableCell>
-							</TableRow>
-						))}
+						{useMemo(() => {
+							return (users.map(({time, name, status, id}) => (
+								<TableRow key={id}>
+									<TableCell align="center">{time}</TableCell>
+									<TableCell align="center">{name}</TableCell>
+									<TableCell align="center">{status ? 'Active' : 'InActive'}</TableCell>
+									<TableCell align="center">
+										<Button
+											color="primary"
+											className={styles.button}
+											onClick={() => usersList.changeStatus(id)}
+										>
+											<AutorenewIcon/>
+										</Button>
+									</TableCell>
+									<TableCell align="center">
+										<Button
+											color="secondary"
+											className={styles.button}
+											onClick={() => usersList.removeUser(id)}
+										>
+											<DeleteIcon/>
+										</Button>
+									</TableCell>
+								</TableRow>
+							)))
+						}, [users])}
 					</TableBody>
 				</Table>
 			</TableContainer>
